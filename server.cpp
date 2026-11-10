@@ -23,19 +23,22 @@ int main()
 
     bind(serverSocket, (sockaddr*)&serverAdress, sizeof(serverAdress));
     listen(serverSocket, 5);
-    int clientSocket = accept(serverSocket, nullptr, nullptr);
-    char buffer[1024] = {};
-    read(clientSocket, buffer, sizeof(buffer));
+    while(true)
+    {
+        int clientSocket = accept(serverSocket, nullptr, nullptr);
+        char buffer[1024] = {};
+        read(clientSocket, buffer, sizeof(buffer));
 
-    cout << buffer << endl;
-    string body = "Hello Friend";
-    string responce =
-        "HTTP/1.1 200 OK\r\n"
-        "Content-Type: text/plain\r\n"
-        "Content-Length:" + to_string(body.size()) +"\r\n"
-        "Connection: close\r\n"
-        "\r\n" + body;
-    send(clientSocket, responce.c_str(), responce.size(), 0);
-    close(clientSocket);
+        cout << buffer << endl;
+        string body = "Hello Friend";
+        string responce =
+            "HTTP/1.1 200 OK\r\n"
+            "Content-Type: text/plain\r\n"
+            "Content-Length:" + to_string(body.size()) +"\r\n"
+            "Connection: close\r\n"
+            "\r\n" + body;
+        send(clientSocket, responce.c_str(), responce.size(), 0);
+        close(clientSocket);
+    }
     return 0;
 }
