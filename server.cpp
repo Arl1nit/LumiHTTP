@@ -29,5 +29,14 @@ int main()
 
     cout << buffer << endl;
 
+    string responce =
+        "HTTP/1.1 200 OK\r\n"
+        "Content-Type: text/plain\r\n"
+        "Content-Length: 5\r\n"
+        "Connection: close\r\n"
+        "\r\n"
+        "Hello";
+    send(clientSocket, responce.c_str(), responce.size(), 0);
+    close(clientSocket);
     return 0;
 }
