@@ -3,7 +3,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
-#include "pages.h"
+#include "fileReader.h"
+// #include "router.h"
 
 using namespace std;
 
@@ -29,6 +30,7 @@ int main()
         int clientSocket = accept(serverSocket, nullptr, nullptr);
         char buffer[1024] = {};
         read(clientSocket, buffer, sizeof(buffer));
+        string request = buffer;
 
         cout << buffer << endl;
         string body = readFile("./web/index.html");
