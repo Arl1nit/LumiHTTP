@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include "pages.h"
 
 using namespace std;
 
@@ -30,10 +31,11 @@ int main()
         read(clientSocket, buffer, sizeof(buffer));
 
         cout << buffer << endl;
-        string body = "Hello Friend";
+        string body = readFile("./web/index.html");
         string responce =
             "HTTP/1.1 200 OK\r\n"
-            "Content-Type: text/plain\r\n"
+            "Server: LumiHTTP\r\n"
+            "Content-Type: text/html; charset=utf-8\r\n"
             "Content-Length:" + to_string(body.size()) +"\r\n"
             "Connection: close\r\n"
             "\r\n" + body;
