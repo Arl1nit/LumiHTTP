@@ -33,7 +33,6 @@ int main()
         string request = buffer;
 
         // cout << buffer << endl;
-        // string body = readFile("./web/index.html");
         string body = readFile(routeRequest(request));
         string responce =
             "HTTP/1.1 200 OK\r\n"

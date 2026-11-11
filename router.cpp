@@ -7,7 +7,7 @@
 #include <algorithm>
 
 using namespace std;
-
+namespace fs = std::filesystem;
 
 string routeRequest(const string& request)
 {
@@ -19,18 +19,26 @@ string routeRequest(const string& request)
         return "";
     }
 
-    string path = request.substr(start, end - start);
-    string webContentPath = "./web";
-    // string mainPagePath = "/index.html";
-    // if(path=="/")
-    // {
-    //     path = webContentPath + mainPagePath;
-    //     return path;
-    // }
 
-    path = webContentPath + path;
-    cout << path << endl;
-    return path;
+    string path = request.substr(start, end - start);
+    if(path == "/")
+        return "./web/index.html";
+    path.erase(0,1);
+    fs::path web = fs::weakly_canonical("./web");
+    fs::path file = fs::weakly_canonical(web / path);
+    fs::path relative = file.lexically_relative(web);
+
+    if(relative.empty() || *relative.begin() == "..")
+    {
+        return "";
+    }
+    if (!fs::exists(file) || !fs::is_regular_file(file))
+    {
+        return "";
+    }
+
+    // cout << file.string() << endl;
+    return file.string();
 }
 
 // string getContentType(const string& path)
