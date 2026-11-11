@@ -4,7 +4,7 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include "fileReader.h"
-// #include "router.h"
+#include "router.h"
 
 using namespace std;
 
@@ -32,8 +32,9 @@ int main()
         read(clientSocket, buffer, sizeof(buffer));
         string request = buffer;
 
-        cout << buffer << endl;
-        string body = readFile("./web/index.html");
+        // cout << buffer << endl;
+        // string body = readFile("./web/index.html");
+        string body = readFile(routeRequest(request));
         string responce =
             "HTTP/1.1 200 OK\r\n"
             "Server: LumiHTTP\r\n"
