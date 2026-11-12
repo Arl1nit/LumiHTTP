@@ -31,13 +31,13 @@ int main()
         char buffer[1024] = {};
         read(clientSocket, buffer, sizeof(buffer));
         string request = buffer;
-
+        string accesingFilePath = routeRequest(request);
         // cout << buffer << endl;
-        string body = readFile(routeRequest(request));
+        string body = readFile(accesingFilePath);
         string responce =
             "HTTP/1.1 200 OK\r\n"
             "Server: LumiHTTP\r\n"
-            "Content-Type: text/html; charset=utf-8\r\n"
+            "Content-Type: "+ getContentType(accesingFilePath) +"; charset=utf-8\r\n"
             "Content-Length:" + to_string(body.size()) +"\r\n"
             "Connection: close\r\n"
             "\r\n" + body;

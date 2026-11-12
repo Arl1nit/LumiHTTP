@@ -41,7 +41,21 @@ string routeRequest(const string& request)
     return file.string();
 }
 
-// string getContentType(const string& path)
-// {
+string getContentType(const string& filePath)
+{
+    string extension = fs::path(filePath).extension().string();
+    transform(extension.begin(), extension.end(), extension.begin(), ::tolower);
 
-// }
+    if (extension == ".html") return "text/html";
+    if (extension == ".css")  return "text/css";
+    if (extension == ".js")   return "application/javascript";
+    if (extension == ".json") return "application/json";
+    if (extension == ".png")  return "image/png";
+    if (extension == ".jpg" || extension == ".jpeg") return "image/jpeg";
+    if (extension == ".svg")  return "image/svg+xml";
+    if (extension == ".ico")  return "image/x-icon";
+    if (extension == ".txt")  return "text/plain";
+    if (extension == ".pdf")  return "application/pdf";
+
+    return "application/octet-stream";
+}

@@ -6,4 +6,4 @@ using namespace std;
 
 
 string routeRequest(const string& request);
-// string getContentType(const string& path);
+string getContentType(const string& filePath);
