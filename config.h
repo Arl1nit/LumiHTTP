@@ -9,6 +9,7 @@ struct Config
     string webRoot = "./web";
     string serverName = "LumiHTTP";
     bool showLogs = true;
+    int backlog = 10;
 };
 
 Config loadConfig();

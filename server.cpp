@@ -26,7 +26,7 @@ int main()
     serverAdress.sin_addr.s_addr = INADDR_ANY;
 
     bind(serverSocket, (sockaddr*)&serverAdress, sizeof(serverAdress));
-    listen(serverSocket, 5);
+    listen(serverSocket, LumiConf.backlog);
     while(true)
     {
         int clientSocket = accept(serverSocket, nullptr, nullptr);

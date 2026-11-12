@@ -24,6 +24,7 @@ Config loadConfig()
         else if (key == "web_root") config.webRoot = value;
         else if (key == "server_name") config.serverName = value;
         else if (key == "show_logs") config.showLogs = (value == "true");
+        else if (key == "backlog") config.backlog = stoi(value);
     }
 
     return config;
