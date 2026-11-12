@@ -1,3 +1,4 @@
+#include <asm-generic/socket.h>
 #include <iostream>
 #include <string>
 #include <sys/socket.h>
@@ -12,6 +13,9 @@ using namespace std;
 int main()
 {
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    int opt = 1;
+    setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
     Config LumiConf = loadConfig();
 
     if(LumiConf.showLogs && serverSocket < 0)
